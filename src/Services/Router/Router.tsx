@@ -1,12 +1,16 @@
 import type { FC } from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import TodoListRoutes from './TodoList.Routes'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Home from '../../Presentation/pages/Home'
 
 const Router: FC = () => {
 	return (
 		<>
 			<BrowserRouter>
-				<TodoListRoutes />
+				<Routes>
+					<Route path='/'>
+						<Route path='home' Component={Home} />
+					</Route>
+				</Routes>
 			</BrowserRouter>
 		</>
 	)
