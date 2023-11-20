@@ -1,0 +1,6 @@
+.btn {
+   @apply w-full py-2 rounded-xl bg-bg-primary-color;
+   & > p {
+      @apply text-text-primary-color;
+   }
+}

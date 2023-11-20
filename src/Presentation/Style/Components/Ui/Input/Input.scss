@@ -1,0 +1,30 @@
+.mainInput {
+   & > h6 {
+      @apply py-2 text-bg-primary-color;
+   }
+   input {
+      background: none;
+      @apply text-input-text-color py-2 px-4;
+   }
+}
+
+.input {
+   input {
+      @apply w-full border border-input-text-color rounded-xl;
+   }
+}
+
+.password {
+   & > div {
+      @apply w-full;
+      @apply border border-input-text-color rounded-xl;
+      @apply flex justify-between items-center gap-4;
+
+      .btn {
+         background: none;
+         & > svg {
+            @apply m-auto;
+         }
+      }
+   }
+}

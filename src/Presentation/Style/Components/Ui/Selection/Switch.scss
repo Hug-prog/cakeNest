@@ -1,0 +1,46 @@
+.switch {
+	height: 30px;
+	width: 60px;
+	border-radius: 30px;
+	display: flex;
+
+	&_left,
+	&_right {
+		height: 20px;
+		width: 20px;
+		border-radius: 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+	}
+
+	&_left {
+		margin: 5px;
+		transition: margin 0.3s;
+		@apply bg-light-outline dark:bg-dark-outline;
+	}
+	&_right {
+		margin: 5px 2px 8px 35px;
+		transition: margin 0.3s;
+		@apply bg-on-light-primary dark:bg-on-dark-primary;
+	}
+
+	&_icon {
+		svg {
+			@apply fill-on-light-primary-container dark:fill-on-dark-primary-container;
+		}
+		&_null {
+			svg {
+				@apply fill-light-surface-variant dark:fill-dark-surface-variant;
+			}
+		}
+	}
+}
+
+.switchFalse {
+	@apply bg-on-light-surface-variant dark:bg-on-dark-surface-variant;
+}
+.switchTrue {
+	@apply bg-light-primary dark:bg-dark-primary;
+}
