@@ -1,14 +1,20 @@
 import { useState, type FC } from 'react'
 import Input from '../Ui/input/Input'
 import Button from '../Ui/Action/Button'
+import { useAppDispatch } from '../../../Application/TypedReduxHooks.Root'
+import { addProfile } from '../../../Infrastructure/Slices/Profile/Profile.slice'
+import { useNavigate } from 'react-router-dom'
 
 const LoginForm: FC = () => {
+	const dispatch = useAppDispatch()
+	const navigate = useNavigate()
 	const [name, setName] = useState<string>()
 
 	const handleSubmit = () => {
 		if (name) {
-			alert(name + ' is login')
+			dispatch(addProfile({ name: name }))
 			setName('')
+			navigate('/order')
 		} else alert('access  denied')
 	}
 
