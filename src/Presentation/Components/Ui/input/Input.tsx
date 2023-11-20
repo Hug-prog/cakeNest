@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import '../../../styles/Components/Ui/Input/input.scss'
+import '../../../Style/Components/Ui/Input/Input.scss'
 import Button from '../Action/Button'
 import { EyeSlashSvg, EyeSvg } from '../../../Assets/Icons/Symbols/index'
 type InputProps = {
