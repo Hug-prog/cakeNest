@@ -6,11 +6,8 @@ const LoginForm: FC = () => {
 	const [name, setName] = useState<string>()
 
 	const handleSubmit = () => {
-		if (name) {
-			alert(name + ' is login')
-		} else {
-			alert('access  denied')
-		}
+		if (name) alert(name + ' is login')
+		else alert('access  denied')
 	}
 
 	return (
