@@ -17,7 +17,7 @@ const LoginForm: FC = () => {
 		if (name) {
 			dispatch(addProfile({ name: name }))
 			setName('')
-			navigate('/order')
+			navigate('/admin/order')
 		} else alert('access  denied')
 	}
 
