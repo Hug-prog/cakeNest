@@ -4,6 +4,9 @@ import Button from '../Ui/Action/Button'
 import { useAppDispatch } from '../../../Application/TypedReduxHooks.Root'
 import { addProfile } from '../../../Infrastructure/Slices/Profile/Profile.slice'
 import { useNavigate } from 'react-router-dom'
+import ProfileSvg from '../../Assets/Icons/Symbols/profile'
+import ArrowSvg from '../../Assets/Icons/Symbols/arrow'
+import styled from 'styled-components'
 
 const LoginForm: FC = () => {
 	const dispatch = useAppDispatch()
@@ -19,15 +22,27 @@ const LoginForm: FC = () => {
 	}
 
 	return (
-		<div>
+		<Div>
 			<Input
+				Icon={ProfileSvg}
 				value={name}
 				name='Entre votre prénom'
+				placeholder='Entrez votre prénom'
 				onChange={(e) => setName(e.target.value)}
 			/>
-			<Button Name='Accéder à votre espace' onClick={handleSubmit} />
-		</div>
+			<Button Icon={ArrowSvg} Name='Mon espace' onClick={handleSubmit} />
+		</Div>
 	)
 }
+
+const Div = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	width: 400px;
+	margin: auto;
+`
 
 export default LoginForm
