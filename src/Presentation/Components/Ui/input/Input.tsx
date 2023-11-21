@@ -6,6 +6,8 @@ type InputProps = {
 	placeholder?: string
 	name: string
 	title?: string
+	// eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/no-explicit-any
+	Icon?: (props: any) => JSX.Element
 	value?: string | number | readonly string[] | undefined | null
 	min?: number
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -38,6 +40,7 @@ const Input: FC<InputProps> = ({
 	placeholder,
 	title,
 	name,
+	Icon,
 	value = '',
 	min,
 	onChange,
@@ -68,7 +71,9 @@ const Input: FC<InputProps> = ({
 
 	return (
 		<div
-			className={`mainInput ${type === 'password' ? 'password' : 'input'}`}
+			className={`mainInput ${
+				type === 'password' ? 'password' : Icon ? 'icon' : 'input'
+			}`}
 			onClick={(event) => {
 				Focus(event)
 				onClick()
@@ -76,6 +81,7 @@ const Input: FC<InputProps> = ({
 		>
 			{title && <h6>{title}</h6>}
 			<div>
+				{Icon && <Icon width={18} min-width={18} height={18} min-height={18} />}
 				<input
 					name={name}
 					type={type === 'password' ? newTypePassword : type}
