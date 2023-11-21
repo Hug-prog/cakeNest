@@ -11,10 +11,10 @@ const Router: FC = () => {
 			<BrowserRouter>
 				<Routes>
 					<Route path='/'>
-						<Route path='*' Component={Error404} />
 						<Route path='home' Component={Home} />
 						<Route path='login' Component={Login} />
 						<Route path='order' Component={Order} />
+						<Route path='*' Component={Error404} />
 					</Route>
 				</Routes>
 			</BrowserRouter>
