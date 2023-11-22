@@ -1,16 +1,32 @@
 import type { FC } from 'react'
 import styled from 'styled-components'
 import Logo from './Logo'
-import { useAppSelector } from '../../../Application/TypedReduxHooks.Root'
+import {
+	useAppDispatch,
+	useAppSelector,
+} from '../../../Application/TypedReduxHooks.Root'
 import { Link } from 'react-router-dom'
 import ProfileSvg from '../../Assets/Icons/Symbols/profile'
+import Switch from '../Ui/Selection/Switch'
+import { toastInfo, toastSucces } from '../../../Services/ToastProvider/Toast'
+import { actionAdmin } from '../../../Infrastructure/Slices/Profile/Profile.slice'
 
 const Navigation: FC = () => {
+	const dispatch = useAppDispatch()
 	const profile = useAppSelector((state) => state.Profile)
+	const handleChange = (value: boolean) => {
+		dispatch(actionAdmin({ isAdmin: value }))
+		if (value) {
+			toastSucces('Mode admin actif', 'Admin')
+		} else {
+			toastInfo('Mode admin désactiver', 'Admin')
+		}
+	}
 	return (
 		<Nav>
 			<Logo />
 			<div className='profile'>
+				<Switch Icon={true} handleChange={handleChange} />
 				<div>
 					<h2>
 						Salut <span className='span'>{profile.data.name}</span>

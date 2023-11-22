@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import ProfileSvg from '../../Assets/Icons/Symbols/profile'
 import ArrowSvg from '../../Assets/Icons/Symbols/arrow'
 import styled from 'styled-components'
+import { IProfile } from '../../../Domain/Profile'
 
 const LoginForm: FC = () => {
 	const dispatch = useAppDispatch()
@@ -15,7 +16,11 @@ const LoginForm: FC = () => {
 
 	const handleSubmit = () => {
 		if (name) {
-			dispatch(addProfile({ name: name }))
+			const profile: IProfile = {
+				name: name,
+				isAdmin: false,
+			}
+			dispatch(addProfile(profile))
 			setName('')
 			navigate('/admin/order')
 		} else alert('access  denied')

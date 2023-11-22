@@ -8,6 +8,7 @@ type ButtonProps = {
 	onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 	className?: string
 	Name?: string
+	isActive?: boolean
 }
 
 const Button: FC<ButtonProps> = ({
@@ -15,14 +16,17 @@ const Button: FC<ButtonProps> = ({
 	Icon,
 	onClick = () => {},
 	className = '',
+	isActive,
 }) => {
 	return (
 		<button
-			className={`btn ${Icon ? 'icon' : ''} ${className}`}
+			className={`btn ${Icon ? 'icon' : ''} ${className} ${
+				isActive ? 'active' : ''
+			}`}
 			onClick={onClick}
 		>
-			{Name && <p>{Name}</p>}
 			{Icon && <Icon width={18} min-width={18} height={18} min-height={18} />}
+			{Name && <p>{Name}</p>}
 		</button>
 	)
 }
