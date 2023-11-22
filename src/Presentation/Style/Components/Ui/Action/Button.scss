@@ -12,9 +12,19 @@
 	width: 100%;
 	justify-content: center;
 	align-items: center;
-	gap: 4px;
+	gap: 14px;
 	padding: 0 1rem;
 	& > svg {
 		rotate: 270deg;
+	}
+}
+
+.active {
+	background-color: gray !important;
+	p {
+		color: white !important;
+	}
+	svg {
+		fill: white !important;
 	}
 }
