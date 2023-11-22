@@ -2,14 +2,16 @@ import type { FC } from 'react'
 import styled from 'styled-components'
 import Button from '../Ui/Action/Button'
 import { ICupcakeCard } from '../../../Domain/CupcakeCard'
+import { PriceFormat } from '../../../Services/Utils/PriceFormat'
 
 const OrderCard: FC<ICupcakeCard> = ({ name, price, imgPath }) => {
+	const priceFormat = PriceFormat(price)
 	return (
 		<Card>
 			<img src={imgPath} alt='img' />
 			<h2>{name}</h2>
 			<div>
-				<h5>{price} €</h5>
+				<h5>{priceFormat} €</h5>
 				<Button Name='Ajouter' />
 			</div>
 		</Card>

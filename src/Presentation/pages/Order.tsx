@@ -8,22 +8,22 @@ const Order: FC = () => {
 		{
 			imgPath: img,
 			name: 'Cake 1',
-			price: 10,
+			price: 1.983893,
 		},
 		{
 			imgPath: img,
 			name: 'Cake 2',
-			price: 20,
+			price: 2.0939,
 		},
 		{
 			imgPath: img,
 			name: 'Cake 3',
-			price: 30,
+			price: 3.0,
 		},
 		{
 			imgPath: img,
 			name: 'Cake 4',
-			price: 3.6,
+			price: 3.603,
 		},
 		{
 			imgPath: img,
