@@ -18,7 +18,7 @@ const PrivateLayout: FC = () => {
 
 const Section = styled.section`
 	background-color: #67b6b9;
-	height: 100vh;
+	height: 96.2vh;
 	padding: 1rem 2rem;
 	.child {
 		background-color: white;

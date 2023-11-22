@@ -13,10 +13,10 @@ const Navigation: FC = () => {
 			<div className='profile'>
 				<div>
 					<h2>
-						salut <span className='span'>{profile.data.name}</span>
+						Salut <span className='span'>{profile.data.name}</span>
 					</h2>
 					<Link className='link' to={'/login'}>
-						se déconnecter
+						Se déconnecter
 					</Link>
 				</div>
 				<ProfileSvg width={38} height={38} fill='rgb(128, 128, 128)' />
@@ -43,6 +43,11 @@ const Nav = styled.section`
 		h2,
 		.link {
 			color: rgb(128, 128, 128);
+			text-decoration: none;
+		}
+
+		a {
+			font-size: 12px;
 		}
 
 		.span {

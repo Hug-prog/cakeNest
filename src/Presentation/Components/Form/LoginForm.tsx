@@ -42,7 +42,7 @@ const Div = styled.div`
 	align-items: center;
 	gap: 1rem;
 	width: 400px;
-	margin: auto;
+	margin: 1rem auto;
 `
 
 export default LoginForm
