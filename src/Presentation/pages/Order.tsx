@@ -49,13 +49,12 @@ const Order: FC = () => {
 }
 
 const Section = styled.section`
-	padding: 2rem 3rem;
+	padding-top: 2rem;
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
 	align-items: center;
 	gap: 3rem;
-	position: relative;
 `
 
 export default Order

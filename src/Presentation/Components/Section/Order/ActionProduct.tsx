@@ -52,7 +52,7 @@ const ActionProduct: FC = () => {
 
 const Section = styled.section`
 	width: 100%;
-	position: absolute;
+	position: sticky;
 	bottom: 0;
 	left: 0;
 	.action {
@@ -71,6 +71,13 @@ const Section = styled.section`
 			svg {
 				fill: gray;
 			}
+		}
+		.icon {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 14px;
+			padding: 0 1rem;
 		}
 		.btn:first-child {
 			p {
