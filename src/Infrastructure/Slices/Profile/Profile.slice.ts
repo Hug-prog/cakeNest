@@ -10,6 +10,6 @@ export const ProfileSlice = createSlice({
 	extraReducers: ProfileReducers,
 })
 
-export const { addProfile } = ProfileSlice.actions
+export const { addProfile, actionAdmin } = ProfileSlice.actions
 
 export default ProfileSlice.reducer
