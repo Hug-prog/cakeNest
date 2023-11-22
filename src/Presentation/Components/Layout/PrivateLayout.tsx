@@ -23,6 +23,7 @@ const Section = styled.section`
 	.child {
 		background-color: white;
 		height: 80vh;
+		overflow: scroll;
 		border-radius: 0 0 5px 5px;
 		box-shadow: inset 0 0 2rem black;
 	}
