@@ -54,7 +54,8 @@
 
 .switchFalse {
 	@apply bg-on-light-surface-variant dark:bg-on-dark-surface-variant;
-	background-color: black;
+	//background-color: black;
+	border: 1px solid #67b6b9;
 }
 .switchTrue {
 	@apply bg-light-primary dark:bg-dark-primary;
