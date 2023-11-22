@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify'
-import '../../Presentation/Styles/toasts.scss'
+import '../../Presentation/Style/toasts.scss'
 
 export const toastError = (message: string | undefined, id: string) => {
 	toast.error(message, {
