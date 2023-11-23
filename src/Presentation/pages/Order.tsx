@@ -37,7 +37,7 @@ const Section = styled.section`
 	flex-wrap: wrap;
 	align-items: center;
 	gap: 3rem;
-	height: 96%%;
+	height: 96%;
 	h1,
 	h2 {
 		font-family: 'Pacifico', cursive;
