@@ -8,6 +8,8 @@ const Order: FC = () => {
 	const products = useAppSelector((state) => state.Products)
 	// console.log(profile.data.isAdmin)
 
+	console.log(products.data)
+
 	return (
 		<Section>
 			{/* <OrderCard name='ChocoBliss' price={7.5} imgPath={img} /> */}
