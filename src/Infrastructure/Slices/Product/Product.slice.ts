@@ -10,6 +10,6 @@ export const ProductSlice = createSlice({
 	extraReducers: ProductReducers,
 })
 
-export const { addProduct, removeProduct } = ProductSlice.actions
+export const { addProduct, removeProduct, editProduct } = ProductSlice.actions
 
 export default ProductSlice.reducer

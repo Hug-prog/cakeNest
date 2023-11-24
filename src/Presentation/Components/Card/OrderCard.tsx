@@ -1,11 +1,15 @@
-import type { FC } from 'react'
+import { type FC } from 'react'
 import styled from 'styled-components'
 import Button from '../Ui/Action/Button'
 import { PriceFormat } from '../../../Services/Utils/PriceFormat'
 import { IProduct } from '../../../Domain/Product'
 import CrossSvg from '../../Assets/Icons/Symbols/cross'
-import { useAppDispatch } from '../../../Application/TypedReduxHooks.Root'
+import {
+	useAppDispatch,
+	useAppSelector,
+} from '../../../Application/TypedReduxHooks.Root'
 import { removeProduct } from '../../../Infrastructure/Slices/Product/Product.slice'
+import { activeCard } from '../../../Infrastructure/Slices/ActiveCard/ActiveCard.slice'
 
 type OrderCardType = {
 	product: IProduct
@@ -13,14 +17,29 @@ type OrderCardType = {
 
 const OrderCard: FC<OrderCardType> = ({ product }) => {
 	const dispatch = useAppDispatch()
+
+	const Profile = useAppSelector((state) => state.Profile.data)
+	const ActiveCard = useAppSelector((state) => state.ActiveCard.data)
+
 	const priceFormat = PriceFormat(product.price)
+
 	return (
-		<Card>
+		<Card
+			$profile={ActiveCard.cardId === product.id}
+			onClick={() => {
+				Profile.isAdmin &&
+					dispatch(activeCard({ cardId: product.id, isSelect: true }))
+			}}
+		>
 			<div>
-				<Button
-					Icon={CrossSvg}
-					onClick={() => dispatch(removeProduct({ id: product.id }))}
-				/>
+				{Profile.isAdmin ? (
+					<Button
+						Icon={CrossSvg}
+						onClick={() => dispatch(removeProduct({ id: product.id }))}
+					/>
+				) : (
+					''
+				)}
 			</div>
 			<img src={product.imgPath} alt='img' />
 			<h2>{product.name}</h2>
@@ -32,19 +51,28 @@ const OrderCard: FC<OrderCardType> = ({ product }) => {
 	)
 }
 
-const Card = styled.section`
+const Card = styled.section<{ $profile: boolean }>`
 	padding: 1rem;
-	background-color: white;
+	//background-color: white;
 	box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
 	width: 220px;
 	border-radius: 10px;
+	cursor: pointer;
+
+	background-color: ${(props) => (props.$profile ? '#67b6b9' : `white`)};
+
 	h2 {
 		font-family: 'Pacifico', cursive;
+		text-align: start;
 	}
 	img {
 		margin-top: 1rem;
 		width: 100%;
 		height: 200px;
+	}
+	img:hover {
+		transition: all 1s;
+		transform: scale(1.1);
 	}
 	div:first-child {
 		display: flex;
@@ -55,12 +83,13 @@ const Card = styled.section`
 			padding: 0;
 		}
 		.btn {
-			background-color: #67b6b9;
+			background-color: ${(props) => (props.$profile ? '#FFF' : `#67b6b9`)};
+			//background-color: #67b6b9;
 			border: none;
 			border-radius: 50px;
 			svg {
 				width: 10px;
-				fill: white;
+				fill: ${(props) => (props.$profile ? '#67b6b9' : `#FFF`)};
 			}
 		}
 	}
@@ -71,14 +100,15 @@ const Card = styled.section`
 		align-items: center;
 
 		h5 {
-			color: #67b6b9;
+			color: ${(props) => (props.$profile ? '#FFF' : `#67b6b9`)};
 		}
 
 		.btn {
 			padding: 0.1rem 1.5rem;
 			border-radius: 5px;
-			background-color: #67b6b9;
-			color: white;
+			/* background-color: #67b6b9; */
+			background-color: ${(props) => (props.$profile ? '#FFF' : `#67b6b9`)};
+			color: ${(props) => (props.$profile ? '#67b6b9' : `#FFF`)};
 			border: none;
 		}
 	}
