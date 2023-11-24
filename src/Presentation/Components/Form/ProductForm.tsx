@@ -1,4 +1,4 @@
-import { useState, type FC, useEffect } from 'react'
+import { useState, type FC } from 'react'
 import Input from '../Ui/input/Input'
 import Button from '../Ui/Action/Button'
 import EuroSvg from '../../Assets/Icons/Symbols/euro'
@@ -39,26 +39,19 @@ const ProductForm: FC = () => {
 			})
 
 		if (product) {
-			console.log(product?.id)
-			dispatch(addProduct(product))
+			const newUuid = uuid()
+			const newProduct: IProduct = {
+				id: newUuid,
+				imgPath: product.imgPath,
+				name: product.name,
+				price: product.price,
+			}
+			dispatch(addProduct(newProduct))
 			toastSucces('Ajouté avec succès !', 'success')
 			setProduct({ imgPath: '', name: '', price: 0, id: '' })
 			changeSubmit(false)
 		}
 	}
-
-	useEffect(() => {
-		const newUuid = uuid()
-
-		//@ts-ignore
-		setProduct((prev) => {
-			const newState = { ...prev }
-			if (newState) {
-				newState.id = newUuid
-			}
-			return newState
-		})
-	}, [product])
 
 	return (
 		<Div>

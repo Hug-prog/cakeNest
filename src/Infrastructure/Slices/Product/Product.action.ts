@@ -7,6 +7,14 @@ export const ProductActions = {
 		state.data = [...state.data, payload]
 	},
 
+	editProduct: (state: ProductState, { payload }: IActionPayload<IProduct>) => {
+		const itemIndex = state.data.findIndex(({ id }) => id === payload.id)
+		if (itemIndex !== -1) {
+			state.data[itemIndex] = payload
+		}
+		return state
+	},
+
 	removeProduct: (
 		state: ProductState,
 		{ payload }: IActionPayload<{ id: string }>
