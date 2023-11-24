@@ -6,9 +6,6 @@ import { useAppSelector } from '../../Application/TypedReduxHooks.Root'
 const Order: FC = () => {
 	const profile = useAppSelector((state) => state.Profile)
 	const products = useAppSelector((state) => state.Products)
-	// console.log(profile.data.isAdmin)
-
-	console.log(products.data)
 
 	return (
 		<Section>
@@ -42,6 +39,9 @@ const Section = styled.section`
 	height: 96%;
 	h1,
 	h2 {
+		text-align: center;
+		color: gray;
+		font-size: 30px;
 		font-family: 'Pacifico', cursive;
 	}
 `
