@@ -5,11 +5,12 @@ import CrossSvg from '../../../Assets/Icons/Symbols/cross'
 import EditSvg from '../../../Assets/Icons/Symbols/edit'
 import ArrowDownSvg from '../../../Assets/Icons/Symbols/arrow-down'
 import arrowUpSvg from '../../../Assets/Icons/Symbols/arrow-up'
+import ProductForm from '../../Form/ProductForm'
 
 const ActionProduct: FC = () => {
 	const [showModal, setShowModal] = useState<boolean>(false)
 	const [showEdit, setShowEdit] = useState<boolean>(false)
-	const [showCreate, setShowCreate] = useState<boolean>(false)
+	const [showCreate, setShowCreate] = useState<boolean>(true)
 	return (
 		<Section>
 			<div className='action'>
@@ -41,7 +42,7 @@ const ActionProduct: FC = () => {
 			{showModal ? (
 				<section>
 					{showEdit ? 'Modifier un produit' : ''}
-					{showCreate ? 'Ajouter un produit' : ''}
+					{showCreate ? <ProductForm /> : ''}
 				</section>
 			) : (
 				''
@@ -81,7 +82,7 @@ const Section = styled.section`
 		}
 		.btn:first-child {
 			p {
-				color: white;
+				color: transparent !important;
 			}
 			svg {
 				rotate: 180deg;
@@ -95,7 +96,7 @@ const Section = styled.section`
 	}
 	section {
 		width: 100%;
-		height: 20vh;
+		padding: 1rem 0;
 		background-color: white;
 	}
 `

@@ -1,15 +1,29 @@
 import type { FC } from 'react'
 import styled from 'styled-components'
 import Button from '../Ui/Action/Button'
-import { ICupcakeCard } from '../../../Domain/CupcakeCard'
 import { PriceFormat } from '../../../Services/Utils/PriceFormat'
+import { IProduct } from '../../../Domain/Product'
+import CrossSvg from '../../Assets/Icons/Symbols/cross'
+import { useAppDispatch } from '../../../Application/TypedReduxHooks.Root'
+import { removeProduct } from '../../../Infrastructure/Slices/Product/Product.slice'
 
-const OrderCard: FC<ICupcakeCard> = ({ name, price, imgPath }) => {
-	const priceFormat = PriceFormat(price)
+type OrderCardType = {
+	product: IProduct
+}
+
+const OrderCard: FC<OrderCardType> = ({ product }) => {
+	const dispatch = useAppDispatch()
+	const priceFormat = PriceFormat(product.price)
 	return (
 		<Card>
-			<img src={imgPath} alt='img' />
-			<h2>{name}</h2>
+			<div>
+				<Button
+					Icon={CrossSvg}
+					onClick={() => dispatch(removeProduct({ id: product.id }))}
+				/>
+			</div>
+			<img src={product.imgPath} alt='img' />
+			<h2>{product.name}</h2>
 			<div>
 				<h5>{priceFormat} €</h5>
 				<Button Name='Ajouter' />
@@ -22,16 +36,35 @@ const Card = styled.section`
 	padding: 1rem;
 	background-color: white;
 	box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
-	width: 250px;
+	width: 220px;
 	border-radius: 10px;
 	h2 {
 		font-family: 'Pacifico', cursive;
 	}
 	img {
+		margin-top: 1rem;
 		width: 100%;
 		height: 200px;
 	}
-	div {
+	div:first-child {
+		display: flex;
+		justify-content: end;
+		.icon {
+			width: 20px;
+			cursor: pointer;
+			padding: 0;
+		}
+		.btn {
+			background-color: #67b6b9;
+			border: none;
+			border-radius: 50px;
+			svg {
+				width: 10px;
+				fill: white;
+			}
+		}
+	}
+	div:last-child {
 		margin: 5px 0;
 		display: flex;
 		justify-content: space-around;

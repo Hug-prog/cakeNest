@@ -2,6 +2,7 @@ import type { FC } from 'react'
 import styled from 'styled-components'
 import Navigation from '../Section/Navigation'
 import { Outlet } from 'react-router-dom'
+import ToastProvider from '../../../Services/ToastProvider/ToastProvider'
 
 const PrivateLayout: FC = () => {
 	return (
@@ -12,13 +13,14 @@ const PrivateLayout: FC = () => {
 			<div className='child'>
 				<Outlet />
 			</div>
+			<ToastProvider />
 		</Section>
 	)
 }
 
 const Section = styled.section`
 	background-color: #67b6b9;
-	height: 96.2vh;
+	height: 96.8vh;
 	padding: 1rem 2rem;
 	.child {
 		background-color: white;
