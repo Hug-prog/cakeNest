@@ -27,7 +27,7 @@ const Section = styled.section`
 		height: 80vh;
 		overflow: scroll;
 		border-radius: 0 0 5px 5px;
-		box-shadow: inset 0 0 2rem black;
+		box-shadow: inset 0 0 1rem gray;
 	}
 `
 
