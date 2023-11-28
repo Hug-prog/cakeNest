@@ -10,6 +10,10 @@ import {
 } from '../../../Application/TypedReduxHooks.Root'
 import { removeProduct } from '../../../Infrastructure/Slices/Product/Product.slice'
 import { activeCard } from '../../../Infrastructure/Slices/ActiveCard/ActiveCard.slice'
+import {
+	addProduct,
+	addmultipleProduct,
+} from '../../../Infrastructure/Slices/Cart/Cart.slice'
 
 type OrderCardType = {
 	product: IProduct
@@ -20,8 +24,45 @@ const OrderCard: FC<OrderCardType> = ({ product }) => {
 
 	const Profile = useAppSelector((state) => state.Profile.data)
 	const ActiveCard = useAppSelector((state) => state.ActiveCard.data)
+	const Cart = useAppSelector((state) => state.Cart.data)
 
 	const priceFormat = PriceFormat(product.price)
+
+	const handelCheck = (product: IProduct) => {
+		if (Cart.length != 0) {
+			let isInCart: { isIn: boolean; productNumber: number } = {
+				isIn: false,
+				productNumber: 0,
+			}
+			Cart.map((itemCart) =>
+				itemCart.product.id === product.id
+					? (isInCart = { isIn: true, productNumber: itemCart.number })
+					: ''
+			)
+			if (isInCart.isIn === false) {
+				dispatch(
+					addProduct({
+						product: product,
+						number: 0,
+					})
+				)
+			} else {
+				dispatch(
+					addmultipleProduct({
+						product: product,
+						number: isInCart.productNumber + 1,
+					})
+				)
+			}
+		} else {
+			dispatch(
+				addProduct({
+					product: product,
+					number: 0,
+				})
+			)
+		}
+	}
 
 	return (
 		<Card
@@ -45,7 +86,7 @@ const OrderCard: FC<OrderCardType> = ({ product }) => {
 			<h2>{product.name}</h2>
 			<div>
 				<h5>{priceFormat} €</h5>
-				<Button Name='Ajouter' />
+				<Button Name='Ajouter' onClick={() => handelCheck(product)} />
 			</div>
 		</Card>
 	)
@@ -64,6 +105,9 @@ const Card = styled.section<{ $profile: boolean }>`
 	h2 {
 		font-family: 'Pacifico', cursive;
 		text-align: start;
+		width: 100%;
+		text-overflow: ellipsis;
+		overflow: hidden;
 	}
 	img {
 		margin-top: 1rem;

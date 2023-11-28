@@ -11,21 +11,25 @@ const Order: FC = () => {
 	return (
 		<Section>
 			<Cart />
-			{products.data.length === 0 ? (
-				profile.data.isAdmin ? (
-					<div className='emptyMenu'>
-						<h1>Le menu est vide ?</h1>
-					</div>
+			<div className='emptyMenu'>
+				{products.data.length === 0 ? (
+					profile.data.isAdmin ? (
+						<div>
+							<h1>Le menu est vide ?</h1>
+						</div>
+					) : (
+						<div>
+							<h1>Victime de notre succès</h1>
+							<h2>De nouvelle recette sont en préparation, revenez vite !</h2>
+						</div>
+					)
 				) : (
-					<div className='emptyMenu'>
-						<h1>Victime de notre succès</h1>
-						<h2>De nouvelle recette sont en préparation, revenez vite !</h2>
-					</div>
-				)
-			) : (
-				products.data.map((cake, i) => <OrderCard key={i} product={cake} />)
-			)}
-			{profile.data.isAdmin ? <ActionProduct /> : ''}
+					products.data.map((cake, i) => <OrderCard key={i} product={cake} />)
+				)}
+				<div className='action'>
+					{profile.data.isAdmin ? <ActionProduct /> : ''}
+				</div>
+			</div>
 		</Section>
 	)
 }
@@ -33,16 +37,19 @@ const Order: FC = () => {
 const Section = styled.section`
 	display: flex;
 	gap: 2rem;
-	align-items: center;
+	//align-items: center;
 	.emptyMenu {
 		display: flex;
-		flex-direction: column;
 		justify-content: center;
 		flex-wrap: wrap;
 		align-items: center;
 		gap: 3rem;
 		width: 100%;
 		min-height: 80vh;
+		position: relative;
+	}
+	.action {
+		width: 80%;
 	}
 
 	h1,

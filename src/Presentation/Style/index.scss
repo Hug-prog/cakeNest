@@ -18,3 +18,37 @@ div {
 	margin: 0;
 	padding: 0;
 }
+
+.buttonCart {
+	position: absolute;
+	right: 0;
+	border-radius: 0 5px 5px 0;
+	background-color: red;
+	height: 100%;
+	.btn {
+		width: 50px;
+		padding: 0.5rem 0;
+		cursor: pointer;
+		z-index: 10;
+		border: none;
+		background: transparent;
+		margin-top: 70%;
+		svg {
+			fill: white;
+			rotate: 0deg;
+		}
+	}
+}
+
+.buttonCartHidden {
+	pointer-events: none;
+	.btn {
+		display: none;
+	}
+}
+
+.multi:hover + .buttonCart {
+	.btn {
+		display: block !important;
+	}
+}
