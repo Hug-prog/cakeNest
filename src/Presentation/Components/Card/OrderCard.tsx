@@ -43,7 +43,7 @@ const OrderCard: FC<OrderCardType> = ({ product }) => {
 				dispatch(
 					addProduct({
 						product: product,
-						number: 0,
+						number: isInCart.productNumber + 1,
 					})
 				)
 			} else {
@@ -58,7 +58,7 @@ const OrderCard: FC<OrderCardType> = ({ product }) => {
 			dispatch(
 				addProduct({
 					product: product,
-					number: 0,
+					number: 1,
 				})
 			)
 		}
