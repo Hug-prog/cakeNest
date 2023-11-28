@@ -25,6 +25,7 @@ div {
 	border-radius: 0 5px 5px 0;
 	background-color: red;
 	height: 100%;
+	display: none;
 	.btn {
 		width: 50px;
 		padding: 0.5rem 0;
@@ -40,15 +41,7 @@ div {
 	}
 }
 
-.buttonCartHidden {
-	pointer-events: none;
-	.btn {
-		display: none;
-	}
-}
-
-.multi:hover + .buttonCart {
-	.btn {
-		display: block !important;
-	}
+.cartCard:hover .buttonCart {
+	z-index: 99;
+	display: block !important;
 }

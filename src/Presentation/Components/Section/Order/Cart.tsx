@@ -82,7 +82,7 @@ const Cart: FC = () => {
 							<p>{product.price} €</p>
 						</div>
 						<p className='multi'>{number ? 'x' + number : ''}</p>
-						<div className={`buttonCart  ${number ? 'buttonCartHidden' : ''}`}>
+						<div className='buttonCart'>
 							<Button
 								Icon={BinSvg}
 								onClick={() => dispatch(removeProduct({ id: product.id }))}

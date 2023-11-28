@@ -63,13 +63,8 @@ const ActionProduct: FC = () => {
 }
 
 const Section = styled.section`
-	width: 100%;
-	position: sticky;
-	bottom: 0;
-	left: 0;
 	.action {
-		width: 40%;
-		margin-left: 2rem;
+		width: 60%;
 		display: flex;
 		align-items: center;
 		.btn {

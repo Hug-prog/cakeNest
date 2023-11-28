@@ -26,7 +26,7 @@ const Order: FC = () => {
 				) : (
 					products.data.map((cake, i) => <OrderCard key={i} product={cake} />)
 				)}
-				<div className='action'>
+				<div className='orderAction'>
 					{profile.data.isAdmin ? <ActionProduct /> : ''}
 				</div>
 			</div>
@@ -48,8 +48,11 @@ const Section = styled.section`
 		min-height: 80vh;
 		position: relative;
 	}
-	.action {
-		width: 80%;
+	.orderAction {
+		width: 100%;
+		position: sticky;
+		bottom: 0;
+		left: 0;
 	}
 
 	h1,
