@@ -17,6 +17,7 @@ const Cart: FC = () => {
 	const dispatch = useAppDispatch()
 	const Cart = useAppSelector((state) => state.Cart.data)
 	const Products = useAppSelector((state) => state.Products.data)
+	const ActiveCard = useAppSelector((state) => state.ActiveCard.data)
 	const [allPrice, setAllPrice] = useState<number>(0)
 
 	const checkisInProducts = () => {
@@ -69,7 +70,12 @@ const Cart: FC = () => {
 			</div>
 			{Cart.length != 0 ? (
 				Cart.map(({ product, number }, i) => (
-					<div key={i} className='cartCard'>
+					<div
+						key={i}
+						className={`cartCard ${
+							ActiveCard.cardId === product.id ? 'activeCard' : ''
+						} `}
+					>
 						<img src={product.imgPath} />{' '}
 						<div>
 							<h3>{product.name}</h3>
@@ -129,6 +135,13 @@ const Div = styled.div`
 			width: 100px;
 			text-overflow: ellipsis;
 			overflow: hidden;
+		}
+	}
+	.activeCard {
+		background-color: #67b6b9;
+		p,
+		h3 {
+			color: white;
 		}
 	}
 	h3 {
