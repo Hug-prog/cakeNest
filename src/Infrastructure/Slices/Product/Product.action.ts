@@ -3,6 +3,13 @@ import { IActionPayload } from '../../Interfaces/IActionPayload'
 import { ProductState } from './Product.inital'
 
 export const ProductActions = {
+	addProducts: (
+		state: ProductState,
+		{ payload }: IActionPayload<IProduct[]>
+	) => {
+		state.data = payload
+	},
+
 	addProduct: (state: ProductState, { payload }: IActionPayload<IProduct>) => {
 		state.data = [...state.data, payload]
 	},

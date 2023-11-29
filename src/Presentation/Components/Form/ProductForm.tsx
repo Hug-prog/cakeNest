@@ -7,15 +7,25 @@ import ProductSvg from '../../Assets/Icons/Symbols/product'
 import { IProduct } from '../../../Domain/Product'
 import { ProductVerifForm } from '../../../Application/Verif/Product/ProductFormVerif'
 import { toastError, toastSucces } from '../../../Services/ToastProvider/Toast'
-import { useAppDispatch } from '../../../Application/TypedReduxHooks.Root'
+import {
+	useAppDispatch,
+	useAppSelector,
+} from '../../../Application/TypedReduxHooks.Root'
 import { addProduct } from '../../../Infrastructure/Slices/Product/Product.slice'
 import styled from 'styled-components'
 import uuid from 'react-uuid'
+import {
+	CreateProduct,
+	CreateProductParams,
+} from '../../../Application/UseCase/Product/Command/CreateProductCommand'
+import { ProductRepository } from '../../../Infrastructure/Repositories/Product/ProductRepository'
 
 const ProductForm: FC = () => {
 	const dispatch = useAppDispatch()
 	const [product, setProduct] = useState<IProduct>()
 	const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+	const products = useAppSelector((state) => state.Products)
+	const profile = useAppSelector((state) => state.Profile)
 
 	const changeSubmit = (state: boolean) => {
 		setIsSubmitting(state)
@@ -40,13 +50,25 @@ const ProductForm: FC = () => {
 
 		if (product) {
 			const newUuid = uuid()
+
 			const newProduct: IProduct = {
 				id: newUuid,
 				imgPath: product.imgPath,
 				name: product.name,
 				price: product.price,
 			}
+
 			dispatch(addProduct(newProduct))
+
+			const newProducts = [...products.data, product]
+			const params: CreateProductParams = {
+				dto: { menu: newProducts, userId: profile.data.name },
+				repository: new ProductRepository(),
+			}
+			console.log(products.data)
+
+			CreateProduct(params)
+
 			toastSucces('Ajouté avec succès !', 'success')
 			setProduct({ imgPath: '', name: '', price: 0, id: '' })
 			changeSubmit(false)

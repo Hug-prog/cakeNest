@@ -1,12 +1,36 @@
-import type { FC } from 'react'
+import { useEffect, type FC } from 'react'
 import styled from 'styled-components'
-import OrderCard from '../Components/Card/OrderCard'
+import ProductCard from '../Components/Card/ProductCard'
 import ActionProduct from '../Components/Section/Order/ActionProduct'
-import { useAppSelector } from '../../Application/TypedReduxHooks.Root'
+import {
+	useAppDispatch,
+	useAppSelector,
+} from '../../Application/TypedReduxHooks.Root'
 import Cart from '../Components/Section/Order/Cart'
-const Order: FC = () => {
+import {
+	GetProductQuery,
+	GetProductQueryParams,
+} from '../../Application/UseCase/Product/Query/GetProductQuery'
+import { ProductRepository } from '../../Infrastructure/Repositories/Product/ProductRepository'
+import { addProducts } from '../../Infrastructure/Slices/Product/Product.slice'
+const Products: FC = () => {
+	const dispatch = useAppDispatch()
 	const profile = useAppSelector((state) => state.Profile)
 	const products = useAppSelector((state) => state.Products)
+
+	const getProducts = async () => {
+		const param: GetProductQueryParams = {
+			id: profile.data.name,
+			repository: new ProductRepository(),
+		}
+		const data = GetProductQuery(param)
+		//@ts-ignore
+		dispatch(addProducts((await data).array))
+	}
+
+	useEffect(() => {
+		getProducts()
+	}, [])
 
 	return (
 		<Section>
@@ -24,7 +48,7 @@ const Order: FC = () => {
 						</div>
 					)
 				) : (
-					products.data.map((cake, i) => <OrderCard key={i} product={cake} />)
+					products.data.map((cake, i) => <ProductCard key={i} product={cake} />)
 				)}
 				<div className='orderAction'>
 					{profile.data.isAdmin ? <ActionProduct /> : ''}
@@ -64,4 +88,4 @@ const Section = styled.section`
 	}
 `
 
-export default Order
+export default Products

@@ -15,11 +15,11 @@ import {
 	addmultipleProduct,
 } from '../../../Infrastructure/Slices/Cart/Cart.slice'
 
-type OrderCardType = {
+type ProductCardType = {
 	product: IProduct
 }
 
-const OrderCard: FC<OrderCardType> = ({ product }) => {
+const ProductCard: FC<ProductCardType> = ({ product }) => {
 	const dispatch = useAppDispatch()
 
 	const Profile = useAppSelector((state) => state.Profile.data)
@@ -69,7 +69,7 @@ const OrderCard: FC<OrderCardType> = ({ product }) => {
 			$profile={ActiveCard.cardId === product.id}
 			onClick={() => {
 				Profile.isAdmin &&
-					dispatch(activeCard({ cardId: product.id, isSelect: true }))
+					dispatch(activeCard({ cardId: product.id, isSelect: false }))
 			}}
 		>
 			<div>
@@ -158,4 +158,4 @@ const Card = styled.section<{ $profile: boolean }>`
 	}
 `
 
-export default OrderCard
+export default ProductCard
