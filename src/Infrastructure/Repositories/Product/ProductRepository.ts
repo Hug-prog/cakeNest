@@ -10,6 +10,7 @@ import {
 	getDoc,
 	setDoc,
 	updateDoc,
+	arrayUnion,
 } from 'firebase/firestore'
 
 export class ProductRepository implements IProductRepository {
@@ -18,9 +19,9 @@ export class ProductRepository implements IProductRepository {
 		await setDoc(docRef, { array: dto.menu })
 	}
 
-	async addProduct(dto: CreateProductsDto) {
+	async addProduct(dto: CreateProductDto) {
 		const docRef = doc(dbContext, 'products', dto.userId)
-		await updateDoc(docRef, { array: dto.menu })
+		await updateDoc(docRef, { array: arrayUnion(dto.product) })
 	}
 
 	//@ts-ignore
@@ -31,13 +32,10 @@ export class ProductRepository implements IProductRepository {
 			return data.data()
 		}
 	}
+
 	//@ts-ignore
 	async removeProduct(dto: RemoveProductDto): Promise<string> {
-		// const docRef = doc(dbContext, 'users', dto.userId)
-		// const data = await getDoc(docRef)
-		// if (data.exists()) {
-		// 	const { menu } = data.data()
-		// 	menu.filter((product: IProduct) => product.id !== dto.paroductId)
-		// }
+		const docRef = doc(dbContext, 'products', dto.userId)
+		await updateDoc(docRef, { array: dto.menu })
 	}
 }

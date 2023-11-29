@@ -1,8 +1,8 @@
 import { IProductRepository } from '../../../../Infrastructure/Interfaces/Repositories/IProductRepository'
-import { CreateProductsDto } from '../../../Dto/CreateProductsDto'
+import { CreateProductDto } from '../../../Dto/CreateProductDto'
 
 export interface CreateProductParams {
-	dto: CreateProductsDto
+	dto: CreateProductDto
 	repository: IProductRepository
 }
 

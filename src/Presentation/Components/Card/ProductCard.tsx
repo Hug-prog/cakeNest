@@ -14,6 +14,11 @@ import {
 	addProduct,
 	addmultipleProduct,
 } from '../../../Infrastructure/Slices/Cart/Cart.slice'
+import {
+	RemoveProduct,
+	RemoveProductCommandParams,
+} from '../../../Application/UseCase/Product/Command/RemoveProductCommand'
+import { ProductRepository } from '../../../Infrastructure/Repositories/Product/ProductRepository'
 
 type ProductCardType = {
 	product: IProduct
@@ -25,8 +30,19 @@ const ProductCard: FC<ProductCardType> = ({ product }) => {
 	const Profile = useAppSelector((state) => state.Profile.data)
 	const ActiveCard = useAppSelector((state) => state.ActiveCard.data)
 	const Cart = useAppSelector((state) => state.Cart.data)
+	const products = useAppSelector((state) => state.Products.data)
 
 	const priceFormat = PriceFormat(product.price)
+
+	const handleDelete = () => {
+		dispatch(removeProduct({ id: product.id }))
+		const newMenu = products.filter((state) => state.id !== product.id)
+		const params: RemoveProductCommandParams = {
+			dto: { menu: newMenu, userId: Profile.name },
+			repository: new ProductRepository(),
+		}
+		RemoveProduct(params)
+	}
 
 	const handelCheck = (product: IProduct) => {
 		if (Cart.length != 0) {
@@ -74,10 +90,7 @@ const ProductCard: FC<ProductCardType> = ({ product }) => {
 		>
 			<div>
 				{Profile.isAdmin ? (
-					<Button
-						Icon={CrossSvg}
-						onClick={() => dispatch(removeProduct({ id: product.id }))}
-					/>
+					<Button Icon={CrossSvg} onClick={() => handleDelete()} />
 				) : (
 					''
 				)}

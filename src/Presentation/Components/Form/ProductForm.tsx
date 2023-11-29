@@ -24,7 +24,6 @@ const ProductForm: FC = () => {
 	const dispatch = useAppDispatch()
 	const [product, setProduct] = useState<IProduct>()
 	const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
-	const products = useAppSelector((state) => state.Products)
 	const profile = useAppSelector((state) => state.Profile)
 
 	const changeSubmit = (state: boolean) => {
@@ -60,12 +59,10 @@ const ProductForm: FC = () => {
 
 			dispatch(addProduct(newProduct))
 
-			const newProducts = [...products.data, product]
 			const params: CreateProductParams = {
-				dto: { menu: newProducts, userId: profile.data.name },
+				dto: { product: newProduct, userId: profile.data.name },
 				repository: new ProductRepository(),
 			}
-			console.log(products.data)
 
 			CreateProduct(params)
 
