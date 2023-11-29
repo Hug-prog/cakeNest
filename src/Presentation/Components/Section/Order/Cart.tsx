@@ -79,7 +79,7 @@ const Cart: FC = () => {
 						<img src={product.imgPath} />{' '}
 						<div>
 							<h3>{product.name}</h3>
-							<p>{product.price} €</p>
+							<p> {product.stock ? product.price + '€' : 'Non disponible'}</p>
 						</div>
 						<p className='multi'>{number ? 'x' + number : ''}</p>
 						<div className='buttonCart'>

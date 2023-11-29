@@ -26,7 +26,12 @@ const Navigation: FC = () => {
 		<Nav>
 			<Logo />
 			<div className='profile'>
-				<Switch Icon={true} handleChange={handleChange} />
+				<Switch
+					Icon={true}
+					textActive='Désactiver le mode admin'
+					textInactive='Activer le mode admin '
+					handleChange={handleChange}
+				/>
 				<div>
 					<h2>
 						Salut <span className='span'>{profile.data.name}</span>

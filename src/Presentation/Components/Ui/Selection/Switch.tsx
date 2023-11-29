@@ -7,12 +7,16 @@ import CrossSvg from '../../../Assets/Icons/Symbols/cross'
 type SwitchPropsProps = {
 	Icon: boolean
 	defaulftValue?: boolean
+	textActive: string
+	textInactive: string
 	handleChange: (value: boolean) => void
 }
 
 const Switch: FC<SwitchPropsProps> = ({
 	Icon,
 	handleChange,
+	textActive,
+	textInactive,
 	defaulftValue = false,
 }) => {
 	const [switched, setSwitched] = useState<boolean>(false)
@@ -32,7 +36,7 @@ const Switch: FC<SwitchPropsProps> = ({
 		>
 			{switched ? (
 				<div className='switch_container'>
-					<p>Désactiver le mode admin</p>
+					<p>{textActive}</p>
 					<div
 						className={`switch_right ${
 							Icon ? 'switch_icon' : 'switch_icon_null'
@@ -50,7 +54,7 @@ const Switch: FC<SwitchPropsProps> = ({
 					>
 						{Icon ? <CrossSvg width={10} height={10} /> : ''}
 					</div>
-					<p>Activer le mode admin</p>
+					<p>{textInactive}</p>
 				</div>
 			)}
 		</div>

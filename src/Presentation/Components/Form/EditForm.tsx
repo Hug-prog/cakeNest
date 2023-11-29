@@ -10,6 +10,7 @@ import PhotoSvg from '../../Assets/Icons/Symbols/photo'
 import EuroSvg from '../../Assets/Icons/Symbols/euro'
 import styled from 'styled-components'
 import { editProduct } from '../../../Infrastructure/Slices/Product/Product.slice'
+import Switch from '../Ui/Selection/Switch'
 
 const EditForm: FC = () => {
 	const dispatch = useAppDispatch()
@@ -17,6 +18,17 @@ const EditForm: FC = () => {
 	const products = useAppSelector((state) => state.Products.data)
 
 	const [product, setProduct] = useState<IProduct>()
+
+	const handleChange = (value: boolean) => {
+		//@ts-ignore
+		setProduct((prev) => {
+			const newState = { ...prev }
+			if (newState) {
+				newState.stock = value
+			}
+			return newState
+		})
+	}
 
 	useEffect(() => {
 		products.map((product) => {
@@ -91,6 +103,12 @@ const EditForm: FC = () => {
 								})
 							}
 						/>
+						<Switch
+							Icon={true}
+							textActive='En stock'
+							textInactive='En rupture'
+							handleChange={handleChange}
+						/>
 					</div>
 				</>
 			)}
@@ -106,6 +124,17 @@ const Div = styled.div`
 
 	div:last-child {
 		width: 400px;
+		.switch {
+			margin-top: 1rem;
+		}
+		.switch .switch_container {
+			div {
+				width: 22px;
+			}
+		}
+		.switch .switch_container .switch_right {
+			margin: 8px 0px 8px 143px;
+		}
 	}
 
 	.btn {

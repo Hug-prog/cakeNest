@@ -37,7 +37,6 @@ const Order: FC = () => {
 const Section = styled.section`
 	display: flex;
 	gap: 2rem;
-	//align-items: center;
 	.emptyMenu {
 		display: flex;
 		justify-content: center;

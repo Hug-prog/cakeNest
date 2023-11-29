@@ -84,6 +84,13 @@ const OrderCard: FC<OrderCardType> = ({ product }) => {
 			</div>
 			<img src={product.imgPath} alt='img' />
 			<h2>{product.name}</h2>
+			{product.stock ? (
+				<p></p>
+			) : (
+				<span className='breakup'>
+					<p>Epuisé</p>
+				</span>
+			)}
 			<div>
 				<h5>{priceFormat} €</h5>
 				<Button Name='Ajouter' onClick={() => handelCheck(product)} />
@@ -99,8 +106,30 @@ const Card = styled.section<{ $profile: boolean }>`
 	width: 220px;
 	border-radius: 10px;
 	cursor: pointer;
+	position: relative;
 
 	background-color: ${(props) => (props.$profile ? '#67b6b9' : `white`)};
+
+	.breakup {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		border-radius: 10px;
+		background-color: #ffffffb8;
+		opacity: 3;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		p {
+			background-color: red;
+			padding: 1rem 2rem;
+			rotate: -45deg;
+			color: white;
+		}
+	}
 
 	h2 {
 		font-family: 'Pacifico', cursive;

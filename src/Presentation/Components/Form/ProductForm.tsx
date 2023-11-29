@@ -11,6 +11,7 @@ import { useAppDispatch } from '../../../Application/TypedReduxHooks.Root'
 import { addProduct } from '../../../Infrastructure/Slices/Product/Product.slice'
 import styled from 'styled-components'
 import uuid from 'react-uuid'
+import Switch from '../Ui/Selection/Switch'
 
 const ProductForm: FC = () => {
 	const dispatch = useAppDispatch()
@@ -26,6 +27,17 @@ const ProductForm: FC = () => {
 		error && errorName
 			? toastError(error, errorName)
 			: toastError('Une erreur est survenue', 'ErreurMission')
+	}
+
+	const handleChange = (value: boolean) => {
+		//@ts-ignore
+		setProduct((prev) => {
+			const newState = { ...prev }
+			if (newState) {
+				newState.stock = value
+			}
+			return newState
+		})
 	}
 
 	const handleSubmit = () => {
@@ -45,10 +57,11 @@ const ProductForm: FC = () => {
 				imgPath: product.imgPath,
 				name: product.name,
 				price: product.price,
+				stock: product.stock,
 			}
 			dispatch(addProduct(newProduct))
 			toastSucces('Ajouté avec succès !', 'success')
-			setProduct({ imgPath: '', name: '', price: 0, id: '' })
+			setProduct({ imgPath: '', name: '', price: 0, id: '', stock: false })
 			changeSubmit(false)
 		}
 	}
@@ -112,6 +125,12 @@ const ProductForm: FC = () => {
 						})
 					}
 				/>
+				<Switch
+					Icon={true}
+					textActive='En stock'
+					textInactive='En rupture'
+					handleChange={handleChange}
+				/>
 				<Button
 					Name='Ajouter un nouveau produit au menu'
 					onClick={handleSubmit}
@@ -127,8 +146,20 @@ const Div = styled.div`
 	align-items: center;
 	gap: 2rem;
 
-	div:last-child {
+	div:nth-child(2) {
 		width: 400px;
+
+		.switch {
+			margin-top: 1rem;
+		}
+		.switch .switch_container {
+			div {
+				width: 22px;
+			}
+		}
+		.switch .switch_container .switch_right {
+			margin: 8px 0px 8px 143px;
+		}
 	}
 
 	.btn {
