@@ -1,11 +1,8 @@
 import Router from './Services/Router/Router'
 import './Presentation/Style/index.scss'
+
 function App() {
-	return (
-		<>
-			<Router />
-		</>
-	)
+	return <Router />
 }
 
 export default App
