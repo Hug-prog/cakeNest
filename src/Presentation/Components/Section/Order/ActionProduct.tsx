@@ -1,15 +1,27 @@
-import { useState, type FC } from 'react'
+import { useState, type FC, useEffect } from 'react'
 import styled from 'styled-components'
 import Button from '../../Ui/Action/Button'
 import CrossSvg from '../../../Assets/Icons/Symbols/cross'
 import EditSvg from '../../../Assets/Icons/Symbols/edit'
 import ArrowDownSvg from '../../../Assets/Icons/Symbols/arrow-down'
 import arrowUpSvg from '../../../Assets/Icons/Symbols/arrow-up'
+import ProductForm from '../../Form/ProductForm'
+import EditForm from '../../Form/EditForm'
+import { useAppSelector } from '../../../../Application/TypedReduxHooks.Root'
 
 const ActionProduct: FC = () => {
+	const activeCard = useAppSelector((state) => state.ActiveCard.data)
+
 	const [showModal, setShowModal] = useState<boolean>(false)
 	const [showEdit, setShowEdit] = useState<boolean>(false)
-	const [showCreate, setShowCreate] = useState<boolean>(false)
+	const [showCreate, setShowCreate] = useState<boolean>(true)
+
+	useEffect(() => {
+		setShowEdit(true)
+		setShowModal(true)
+		setShowCreate(false)
+	}, [activeCard])
+
 	return (
 		<Section>
 			<div className='action'>
@@ -40,8 +52,8 @@ const ActionProduct: FC = () => {
 			</div>
 			{showModal ? (
 				<section>
-					{showEdit ? 'Modifier un produit' : ''}
-					{showCreate ? 'Ajouter un produit' : ''}
+					{showEdit ? <EditForm /> : ''}
+					{showCreate ? <ProductForm /> : ''}
 				</section>
 			) : (
 				''
@@ -51,13 +63,8 @@ const ActionProduct: FC = () => {
 }
 
 const Section = styled.section`
-	width: 100%;
-	position: sticky;
-	bottom: 0;
-	left: 0;
 	.action {
-		width: 40%;
-		margin-left: 2rem;
+		width: 60%;
 		display: flex;
 		align-items: center;
 		.btn {
@@ -81,7 +88,7 @@ const Section = styled.section`
 		}
 		.btn:first-child {
 			p {
-				color: white;
+				color: transparent !important;
 			}
 			svg {
 				rotate: 180deg;
@@ -95,7 +102,7 @@ const Section = styled.section`
 	}
 	section {
 		width: 100%;
-		height: 20vh;
+		padding: 1rem 0;
 		background-color: white;
 	}
 `
