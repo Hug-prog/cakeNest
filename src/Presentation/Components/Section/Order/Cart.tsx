@@ -12,6 +12,7 @@ import {
 import { CounterPrice } from '../../../../Services/Utils/CounterPrice'
 import { ICart } from '../../../../Domain/Cart'
 import BinSvg from '../../../Assets/Icons/Symbols/bin'
+import { Link } from 'react-router-dom'
 
 const Cart: FC = () => {
 	const dispatch = useAppDispatch()
@@ -69,27 +70,37 @@ const Cart: FC = () => {
 				<h3>Total</h3> <h3>{allPrice + ' €'}</h3>
 			</div>
 			{Cart.length != 0 ? (
-				Cart.map(({ product, number }, i) => (
-					<div
-						key={i}
-						className={`cartCard ${
-							ActiveCard.cardId === product.id ? 'activeCard' : ''
-						} `}
-					>
-						<img src={product.imgPath} />{' '}
-						<div>
-							<h3>{product.name}</h3>
-							<p>{product.price} €</p>
+				<>
+					{Cart.map(({ product, number }, i) => (
+						<div
+							key={i}
+							className={`cartCard ${
+								ActiveCard.cardId === product.id ? 'activeCard' : ''
+							} `}
+						>
+							<img src={product.imgPath} />{' '}
+							<div>
+								<h3>{product.name}</h3>
+								<p>{product.price} €</p>
+							</div>
+							<p className='multi'>{number ? 'x' + number : ''}</p>
+							<div className='buttonCart'>
+								<Button
+									Icon={BinSvg}
+									onClick={() => dispatch(removeProduct({ id: product.id }))}
+								/>
+							</div>
 						</div>
-						<p className='multi'>{number ? 'x' + number : ''}</p>
-						<div className='buttonCart'>
-							<Button
-								Icon={BinSvg}
-								onClick={() => dispatch(removeProduct({ id: product.id }))}
-							/>
-						</div>
+					))}
+					<div>
+						<Link
+							to={{ pathname: '/admin/order' }}
+							state={{ totalPrice: allPrice }}
+						>
+							Passer commande
+						</Link>
 					</div>
-				))
+				</>
 			) : (
 				<h3>Votre Commande est vide</h3>
 			)}
